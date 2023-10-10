@@ -1,0 +1,361 @@
+Spring Framework
+
+@Primary Annotation :- This annotation gives higher preferences to a bean when there
+are multiple beans of the same type.
+
+In Field dependency injection we can not make dependency object as immutable.
+
+What is Problem in Spring  Framework over Spring Boot?
+--> Basically, Spring based applications have a lot of configuration.
+
+When we develope Spring MVC web application using Spring framework then we need to
+configure.
+Component Scan, View Resolver,DispatcherServlet,Web Jars(delivering static content)
+among others things.
+
+When we use Hibernate/JPA in same spring MVC application then we would need to configure a 
+Data Source, Entity Manager factory/session factory,Transaction Manager and among
+other things.
+
+
+When we use cache, messege queue, NoSQL in the same Spring MVC application then we 
+need to configure to:
+Cache Configuration.
+Messege Queue Configuration, NoSQL Database Configuration.
+
+One more major problem: we need to maintain all different jar dependencies and its
+configuration.
+
+Main Goal of Spring Boot is to quickly write spring based applications without requiring
+developers to write the same boilerplate configuration again and again.
+
+@SpringBootApplication annoation is combination of @ComponentScan,@SpringBootConfiguration and
+@EnableAutoConfiguration is enables the automatic configuration of application.
+in spring mvc we need to configure datasource for database operations in xml file and
+configure internalresourceviewResolver for returing view in xml file . So this 
+type of configuration is not required in spring boot.
+
+@RequestParam :- This annotation is used to extract query parameter value in request 
+url.
+
+@PostMapping :- This annotation is used to map incoming Http Post request onto specific
+handler method.It is used to create new resource
+
+@RequestBody :- This annotation is responsible to retrive Http request body
+ and automatically convert into java object. It internally uses
+spring provided HttpResponseMessenger which convert json object into 
+java object.
+
+
+@ResponseStatus :- This annotation is used to send Http status to client.
+
+
+@PutMapping : This annotation is used to map incoming HTTP Put request onto 
+specific handler method . Main purpose of this annotation is update the existing \
+resource.
+
+@DeleteMapping : This annotation is used to map HTTP delete request onto specific
+handler methods. It is used to delete the resource.
+
+
+@ResponseEntity : - ResponseEntity represents the whole HttpResponse like http status, header and 
+body.As a result we can use it to fully configure fully Http response.
+
+If we want to use it we have to return it from endpoints . Spring takes care of the 
+rest.
+
+ResponseEntity is Generic Type. Consequently , we can use any type of response entity.
+
+
+Use Class level @RequestMapping annotation to define base url for entire controller
+
+Spring Boot Application Architecture (3 Layer Architecture)
+
+
+PostMan--->  Controller ---> Service ---> Repository ---> DB
+			  Layer			  Layer			Layer
+
+Controller Layer :- Spring Boot rest api in Controller Layer
+Service Layer :- Service Layer holds all the bussiness login of application.
+Repository Layer :- Repository holds all the database related logic . It is 
+also called as Persistent Layer.It is responsible to talk with database.
+
+Lombok is used to reduce boilerplate code. Using lombok annotation we do not need define
+explicitly getter and setter and constructor.
+
+@Getter : This annotation creates the all getters of entity class.
+@Setter : This annotation creates all of the setters of entity class.
+@NoArgsConstructor: This annoation creates the No argument constructor/default constructor.
+@AllArgsConstructor : This annotation creates the all argument constructor. 			  
+
+
+
+@PutMapping : This annotation is used to map HTTP Put Request onto specific handler method.
+It is used to update the resource.
+
+@DeleteMapping : This annotation is used  to map HTTP Delete request onto specific handler method.
+It is used to delete the resource.
+
+
+DTO(Data Transfer Object) :- Data Transfer Object is  widely used design pattern which is 
+used to transfer data between client server. DTO reduces the no. of remote calls.
+If we want to return specific fields from entity then we use DTO instead of using
+entity.
+
+DTO Extract the required data that expect the client  instead of Entity.
+Advantages of DTO
+i) Security Purpose 
+
+ii) Reduce the No. of Remote call
+
+ModelMapper class is used to convert jpa entity to DTO and vice versa.
+
+Using MapStruct when @Mapping Annotation is used when source entity field name is 
+different from destination entity field name.
+
+@ResponseStatus :- This annotation is used to send http status from controller to view.
+
+@ControllerAdvice :- If we want to handle the exception at globally 
+
+
+WebRequest Interface gives the request metadata such as request header, header names etc.
+
+@ExceptionHandler :- This annotation is used to handle the custom exception and 
+return the custom response back to the client.
+
+@ControllerAdvice :- This annotation is  used to handle exception globally.
+It handles the both specific exception and global exception at single place.
+
+
+Java Bean Validation API is used to validate Java Projects.
+
+Hibernate Validator is an implementation of Java Bean Validation API.
+
+Important Bean Validation Annotation 
+i) @NotNull :- This Annotation validates the annotated property value is not null.
+ii) @Size :- Size annotation validates that the annotated attribute value has a size
+min and max attribute.This can be apply to String , Map ,Collection and Array 
+Properties.
+iii) @Min :- @Min annotation validates that the annotated attribute has value not 
+smaller than the property value.
+iv) @Max : @Max annotation validates that the annotated attribute value greater than 
+the property value.
+v) @Email : @Email Annotation validated that the annotated value has a valid 
+email address.
+vi) @NotEmpty : This annotation validates that the annotated value has not a null\
+or empty value. Can be applied to String , Array , Collection , Map properties.
+vii) @NotBlank : This annotation is applied to text value. And validated that the 
+property is not null or whitespace.
+
+
+//Spring Boot Actuator 
+Spring Boot Actuator module provides ready made production ready features such
+as monitoring metrics and health checks.
+Spring Boot actuator enable you to monitor the application by using HTTP endpointsa
+JMX.
+Spring Boot provide spring-boot-starter-actuator library to auto-configure actuator.
+
+i)/info Endpoints :- If you added any information about your application in your 
+application.properties file then it can be view by /info endpoint.
+
+Ex:- http:8080/actuator/info
+
+ii)/health Endpoints :- The /health endpoint shows the health of the application
+including diskspaces, databases and more.
+Ex:- http:8080/actuator/health
+
+iii)/beans Endpoint :- The /beans endpoint shows all the bean which are registered
+in your application, including the bean you explicitly configured and those are auto-configurec
+by spring boot application.
+Ex:- http:8080/actuator/bean
+
+iv) /conditions :- The /conditions shows the auto - configuration report , including
+the positive matches and negative matches.
+In positive matches shows all the spring auto configured bean which are auto configured by @Conditional
+annotation.
+
+Ex:- http:8080/actuator/conditions
+
+v)/mappings :- The /mappings annotation shows all the @RequestMapping path declared
+in the application.
+This is very useful for checking which request path will be handled by which 
+handler method.
+Ex :- http:8080/actuator/mappings
+
+vi) /configprops :- The /configprops endpoints shows all the configuration properties
+defined by @ConfigurationProperties bean including your configuration properties 
+defined in application.properties or yml files.
+
+Using this annotation we can see all the configuration defined in your spring boot
+application.
+Ex :- http:8080/actuator/configprops
+
+vii) /metrics :- /metrics endpoint shows various metrics about your current application
+such as how much memory it used, how much memory is free, how much heap is used, and how much threads are used and so on.
+
+Ex : http:8080/actuator/metrics
+
+viii) /env :- The /env endpoint shows all the properties from the Spring 
+Configurable Enviornment interface , such as list of active profiles, application
+properties, system enviornment variable and so on.
+
+Ex:- localhost:8080/actuator/env
+
+ix) /threaddump :- /threaddump endpoint you can view your application thread 
+dumb with running thread details and JVM Stack trace .
+Using this endpoit you can see thread details and JVM Stack trace in your curruent runnign spring boot application.
+Ex:- localhost:8080/actuator/threaddump
+
+x) /loggers :- The /loggers endpoints allows you to view and configure logging
+levels of your application at runtime.
+
+Ex : localhost:8080/actuator/loggers
+
+You can view the logging level of specific logger.
+http:localhost:8080/actuator/loggers/{name}
+
+Ex: - 
+http:8080/actuator/loggers/org.springjpadata
+
+xi) /shutdown : Using /shutdown endpoint you can gracefully shutdown the application 
+.
+
+Ex:- http:localhost/8080/actuator/shutdown 
+
+/shutdown endpoint is not enabled by default. You can enable by adding properties
+int application.properties file.
+
+Management.endpoint.shutdown.enabled=true
+
+After adding this property to the application.properties file , you need to send the 
+HTTP Post request to the below endpoint
+
+http:localhost/8080/actuator/shutdown.
+
+
+//SpringDoc OpenAPI 
+springdoc-openapi java library automate the generation of API documentation using spring boot 
+projects. Using this documentation we can test all the rest api.We can get all 
+the information about the rest api.
+springdoc-openapi library provides the integration between spring boot and swagger ui.
+Automatically generated documentation in JSON/YAML or HTML format API.
+
+
+SpringDoc OpenApi internally uses swagger-ui to generate REST Api Documentation and display
+that documentation in web pages.
+
+
+The Library Supports : 
+   * OpenAPI 3
+   * Spring-boot v3(Java 17 and Jakarta 19)
+   * JSR - 303 , specially of @NotNull,@Max,@Min and @Size\
+   * Swagger-ui
+   * OAuth 2
+This is community  based project , not maintained by spring framework contributors.
+   
+   
+   What does the @OpenAPIDefinition annoation ?
+   --> The @OpenAPIDefinition annotation is used to define the global information and settings for the OpenAPI (formerly Swagger) specification for your Spring Boot application.
+   It allows you to configure details like
+   API version, title, description, license, and contact information.
+   
+   To Customizing the swagger API documentation to details such  API version, title, description, license, and contact information.
+   etc.
+   
+   @Tag annotation is used to provide description about user resource.
+   
+   we can see API Documentation using spring OpenAPI by using url 
+   localhost:8080/swagger-ui/index.html
+   
+   
+   What is Git and GitHub ?
+   
+   
+   @PatchMapping :- This Annotation is used to update the resource partially.
+   Using this annotation we can update the existing record partially.
+   
+//Authentication and Authorisation
+Authentication is a process of verifying the identity of a user or system attempting
+to access a resource.
+
+Authentication Example :=
+ * Password - based Authentication :- User enters their username(emai) and password
+ to access their Gmail Accounts. (Facebook, Yahoo, Linkedin).
+ 
+ * Biometric Authentication :- User scans his fingerprint to unlock the smartphone.
+ 
+ * Multi-Factor Authentication :- User enteres a password and receives a OTP to 
+ access their online banking account.
+ 
+ Spring Boot Provides in-built support for Authentication.
+ 
+
+Authorisation is process of determining what actions an authenticated user or system 
+is allowed to perform on resource.
+
+In simple words, once user logged in the what resources are available for the resource.
+or
+Authorisation is process of what action to be performed once their identity has been verified.
+
+Role - Based Authorisation: User with 'Manager' role can accept and reject the leave request,
+while user with 'Employee' role can apply leave request.
+
+Spring boot provides built in supports for authorisation.
+ 
+ 
+ BCryptEncoder is widely used implementation and internally BCryptAlgorithm to encode the password.
+ 
+ In spring we can implement method level security by using @EnableMethodSecurity and @PreAuthorize
+ 
+ @EnableMethodSecurity Annotation is class level annotation.
+ @PreAuthorize("hasRole('ADMIN') annotation is used to authorize logged user is of the particular 
+ role or not which is mentioned in parenthesis.
+ 
+ When we use basic authentication pop will show and user name and password 
+ will be passed in header of request.
+Using Basic Authentication username and password will be passed in header of request
+in base 64 format.
+
+When we annotate the class as @Configuration then that class becomes java based 
+configuartion.
+ 
+Spring security provides built in support for role based authorization. 
+ 
+To apply method level security we need two annotations as @EnableMethodSecurity and 
+@PreAuthorize annotations. 
+ 
+ 
+-- Transaction Management Using Spring Data JPA ---
+@Transactional : THis annotation fascillates the transaction management.It is 
+used in service layer.Using this transcation we can perform all the opration
+in single transaction.
+
+--Types of Transaction Propogation
+1) Required Transaction 
+-- Spring Checks if there is an active transaction , it uses existing transaction else it creates new one
+transaction.
+-- Otherwise , bussiness logic will be append to currently active transaction.
+-- If the exception occurs, both parent and child will be rolled back as they both
+use the same physicial transaction.
+
+--You can use this annotation on following in the lowest to highest priority order.
+i) interface
+ii)superclass
+iii) class
+iv)interface method
+v) superclass method 
+vi)method
+
+==Transaction Propogation
+Transaction propogation defines our bussiness login boundary.Spring manages start and 
+pause a transaction according to our propogation setting. 
+
+
+====Real Time REST Search Api
+
+JPQL : JPQL Stands for Java Persistance Query Language. Is the query language which 
+is used to interact with the databse using JPA . Using JPQL we can write database independent
+query. For writing query we donn't need to know the database dialect.
+
+JPA :- JPA stands for Java Persistance API. It is java specification which provide standard
+way to interact with the relational database using the java application.
