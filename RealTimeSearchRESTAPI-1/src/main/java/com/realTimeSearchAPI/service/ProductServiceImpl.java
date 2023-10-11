@@ -28,7 +28,7 @@ public class ProductServiceImpl implements ProductService{
 
 
 	public Product createProduct(Product product) {
-		return productRepository.createProduct(product);
+		return productRepository.save(product);
 	}
 
 }
